@@ -15,7 +15,8 @@ import ClickerSwimmer from "./ClickerSwimmer";
 
 // export default function TapBlock () {
 const TapBlock = observer(() => {
-
+  const tg = window.Telegram.WebApp;
+  alert(JSON.stringify(tg))
   const { tapsCount, setTapsCount } = useContext(UpdateContext);
   const multiplyTaps = useRef(false);
   
