@@ -41,11 +41,11 @@ useEffect(() => {
   const auth = async () => {
     try {
       let response;
-      await axios.post('https://e434-95-161-221-131.ngrok-free.app/api/init', { initData });
+      await axios.post('https://4318-95-161-221-131.ngrok-free.app/api/init', { initData });
 
-      if (document.location.href === 'https://e434-95-161-221-131.ngrok-free.app/welcome') return setShow(true);
+      if (document.location.href === 'https://4318-95-161-221-131.ngrok-free.app/welcome') return setShow(true);
 
-      response = await axios.post('https://e434-95-161-221-131.ngrok-free.app/api/info');
+      response = await axios.post('https://4318-95-161-221-131.ngrok-free.app/api/info');
 
       if (response.data.length === 0 && !document.location.href.includes('/api')) {
         return document.location.href = '/welcome';
@@ -54,7 +54,7 @@ useEffect(() => {
       infoStore.setInfo(response.data[0]);
 
       if (!document.location.href.includes('/clan/my')) {
-        response = await axios.post('https://e434-95-161-221-131.ngrok-free.app/api/clan');
+        response = await axios.post('https://4318-95-161-221-131.ngrok-free.app/api/clan');
         setClan(response.data);
       }
 

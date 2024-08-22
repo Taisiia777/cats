@@ -1,5 +1,5 @@
 const config = {
-    url: 'https://e434-95-161-221-131.ngrok-free.app',
+    url: 'https://4318-95-161-221-131.ngrok-free.app',
     blockId: '397',
     planets_list: [
         {text: 'Bitrex', total: 20000, name: 'bitrex', icon: 'bitrex'},
