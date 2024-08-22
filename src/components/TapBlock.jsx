@@ -7,8 +7,7 @@ import infoStore from '../stores/infoStore';
 import { UpdateContext } from '../contexts/UpdateTime';
 
 import { useState, useEffect, useRef, useContext } from "react";
-import { useNavigate } from 'react-router-dom';
-import { ReactComponent as Energy } from '../assets/svg/energy.svg';
+// import { ReactComponent as Energy } from '../assets/svg/energy.svg';
 
 import CutNumber from '../CutNumber';
 import ClickerAction from './ClickerAction';
@@ -16,7 +15,6 @@ import ClickerSwimmer from "./ClickerSwimmer";
 
 // export default function TapBlock () {
 const TapBlock = observer(() => {
-  const navigate = useNavigate();
 
   const { tapsCount, setTapsCount } = useContext(UpdateContext);
   const multiplyTaps = useRef(false);
