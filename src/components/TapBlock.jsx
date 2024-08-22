@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Coin from "../Coin";
 import cat from './../assets/cat.png';
 import { appStateAtom } from "../App";
