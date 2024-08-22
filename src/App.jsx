@@ -69,7 +69,6 @@ useEffect(() => {
     }
   };
 
-  tgReady();
   auth();
 }, []);
 
