@@ -4,7 +4,7 @@ import './App.scss'
 import cat from './assets/cat.png'
 
 import { atom, useAtom } from 'jotai';
-
+import { retrieveLaunchParams } from '@tma.js/sdk';
 import Exchange from './pages/Exchange';
 import Earn from './pages/Earn';
 import FooterMenu from './components/FooterMenu';
@@ -31,15 +31,10 @@ setTimeout(()=>{setLoading(false)},1500);
 
 },[]);
 useEffect(() => {
-  const tg = window.Telegram?.WebApp;
 
-  if (!tg) {
-    console.error('Telegram WebApp is not initialized');
-    return;
-  }
 
-  const initData = tg.initData;
-  const initDataUnsafe = tg.initDataUnsafe;
+  const { initData, initDataUnsafe } = retrieveLaunchParams();
+
 
   const tgReady = () => {
     tg.headerColor = '#141019';
