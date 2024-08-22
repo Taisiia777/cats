@@ -8,7 +8,7 @@ import { UpdateContext } from '../contexts/UpdateTime';
 
 import { useState, useEffect, useRef, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
-import { ReactComponent as Energy } from '../../assets/svg/energy.svg';
+import { ReactComponent as Energy } from '../assets/svg/energy.svg';
 
 import CutNumber from '../CutNumber';
 import ClickerAction from './ClickerAction';

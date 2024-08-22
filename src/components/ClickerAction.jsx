@@ -6,7 +6,7 @@ const ClickerAction = ({ icon, to, onClick }) => {
 
     return (
         <div className="clicker_action" onClick={onClick ? onClick : () => navigate(to)}>
-            <ReactSVG src={require(`../../assets/svg/${icon}.svg`)} />
+            <ReactSVG src={require(`../assets/svg/${icon}.svg`)} />
         </div>
     )
 };
