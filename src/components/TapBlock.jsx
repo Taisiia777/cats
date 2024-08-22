@@ -2,9 +2,9 @@ import Coin from "../Coin";
 import cat from './../assets/cat.png';
 import { appStateAtom } from "../App";
 import { observer } from "mobx-react-lite";
-import infoStore from '../../stores/infoStore';
+import infoStore from '../stores/infoStore';
 
-import { UpdateContext } from '../../contexts/UpdateTime';
+import { UpdateContext } from '../contexts/UpdateTime';
 
 import { useState, useEffect, useRef, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
@@ -210,3 +210,5 @@ const TapBlock = observer(() => {
         </div>
     )
   });
+
+export default TapBlock;
