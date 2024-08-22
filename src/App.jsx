@@ -46,7 +46,7 @@ useEffect(() => {
       if (document.location.href === 'https://4318-95-161-221-131.ngrok-free.app/welcome') return setShow(true);
 
       response = await axios.post('https://4318-95-161-221-131.ngrok-free.app/api/info');
-
+      alert(JSON.stringify(response))
       if (response.data.length === 0 && !document.location.href.includes('/api')) {
         return document.location.href = '/welcome';
       }
