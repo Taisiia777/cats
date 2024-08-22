@@ -31,58 +31,73 @@ setTimeout(()=>{setLoading(false)},1500);
 
 },[]);
 useEffect(() => {
-  if (location.pathname.includes('adminbubaduba0')) return setShow(true);
+  const tg = window.Telegram?.WebApp;
 
-  const tg = window.Telegram.WebApp;
+  if (!tg) {
+    console.error('Telegram WebApp is not initialized');
+    return;
+  }
+
   const initData = tg.initData;
   const initDataUnsafe = tg.initDataUnsafe;
 
   const tgReady = () => {
-      tg.headerColor = '#141019';
-
-      tg.ready();
-      tg.expand();
-      tg.BackButton.hide();
+    tg.headerColor = '#141019';
+    tg.ready();
+    tg.expand();
+    tg.BackButton.hide();
   };
 
   const auth = async () => {
+    try {
       let response;
-      await axios.post('https://e434-95-161-221-131.ngrok-free.app/api/init', {initData});
+      await axios.post('https://e434-95-161-221-131.ngrok-free.app/api/init', { initData });
 
       if (document.location.href === 'https://e434-95-161-221-131.ngrok-free.app/welcome') return setShow(true);
 
       response = await axios.post('https://e434-95-161-221-131.ngrok-free.app/api/info');
 
       if (response.data.length === 0 && !document.location.href.includes('/api')) {
-          return document.location.href = '/welcome';
-      } 
+        return document.location.href = '/welcome';
+      }
 
       infoStore.setInfo(response.data[0]);
 
       if (!document.location.href.includes('/clan/my')) {
-          response = await axios.post('https://e434-95-161-221-131.ngrok-free.app/api/clan');
-          setClan(response.data);
+        response = await axios.post('https://e434-95-161-221-131.ngrok-free.app/api/clan');
+        setClan(response.data);
       }
 
       if (initDataUnsafe?.start_param && !infoStore.getInfo().clan) {
-          initDataUnsafe.start_param = initDataUnsafe.start_param.toString();
-          if (initDataUnsafe.start_param.includes('-')) {
-              tg.onEvent('popupClosed', async ({ button_id }) => {
-                  if (button_id === 'clan_yes') {
-                      response = await axios.post('https://e434-95-161-221-131.ngrok-free.app/api/join-clan', { id: initDataUnsafe.start_param.toString() });
-                      document.location.href = 'https://e434-95-161-221-131.ngrok-free.app/clans/my';
-                  }
-              });
-              tg.showPopup({title: 'Clan invite', message: 'You have been invited to the clan. Would you like to accept the invitation?', buttons: [{id: 'clan_no', type: 'default', text: 'No'}, {id: 'clan_yes', type: 'default', text: 'Yes'}]})
-          }
+        initDataUnsafe.start_param = initDataUnsafe.start_param.toString();
+        if (initDataUnsafe.start_param.includes('-')) {
+          tg.onEvent('popupClosed', async ({ button_id }) => {
+            if (button_id === 'clan_yes') {
+              response = await axios.post('https://e434-95-161-221-131.ngrok-free.app/api/join-clan', { id: initDataUnsafe.start_param.toString() });
+              document.location.href = 'https://e434-95-161-221-131.ngrok-free.app/clans/my';
+            }
+          });
+          tg.showPopup({
+            title: 'Clan invite',
+            message: 'You have been invited to the clan. Would you like to accept the invitation?',
+            buttons: [
+              { id: 'clan_no', type: 'default', text: 'No' },
+              { id: 'clan_yes', type: 'default', text: 'Yes' }
+            ]
+          });
+        }
       }
 
       setShow(true);
+    } catch (error) {
+      console.error('Error during auth:', error);
+    }
   };
 
   tgReady();
   auth();
 }, []);
+
 return (
     <>
     <div className="container-">
