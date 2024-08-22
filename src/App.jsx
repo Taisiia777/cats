@@ -19,7 +19,8 @@ import Level from './pages/Level';
 export const appStateAtom = atom('exchange');
 export const popupStateAtom = atom(1);
 function App() {
- 
+  const tg = window.Telegram.WebApp;
+
 
   const [appState,setAppState] = useAtom(appStateAtom);
   useEffect(() => {
@@ -31,10 +32,7 @@ setTimeout(()=>{setLoading(false)},1500);
 
 },[]);
 useEffect(() => {
-  alert(JSON.stringify(window.Telegram))
-  alert(JSON.stringify(window.Telegram.WebApp))
 
-  const tg = window.Telegram.WebApp;
 
   const { initData, initDataUnsafe } = retrieveLaunchParams();
 
