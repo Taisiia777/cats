@@ -31,6 +31,9 @@ setTimeout(()=>{setLoading(false)},1500);
 
 },[]);
 useEffect(() => {
+  alert(JSON.stringify(window.Telegram))
+  alert(JSON.stringify(window.Telegram.WebApp))
+
   const tg = window.Telegram.WebApp;
 
   const { initData, initDataUnsafe } = retrieveLaunchParams();
