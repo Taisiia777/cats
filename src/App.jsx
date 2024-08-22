@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 import './App.scss'
 import cat from './assets/cat.png'
-
+import axios from 'axios';
 import { atom, useAtom } from 'jotai';
 import { retrieveLaunchParams } from '@tma.js/sdk';
 import Exchange from './pages/Exchange';
