@@ -36,26 +36,16 @@ useEffect(() => {
 
   const { initData, initDataUnsafe } = retrieveLaunchParams();
   console.log(JSON.stringify(initData))
-  const register = async () => await axios.post(config.url+'/api/reg', { planet: "bitrex" });
-  alert(JSON.stringify(register))
-  const handleClick = async () => {
-          await register();
-          return;
-      
-      if (name === infoStore.getInfo().planet) return;
-
-      let data = infoStore.getInfo()
-
-      data.planet = name;
-      infoStore.setInfo(data);
-
-      const response = await axios.post(config.url+'/api/change-planet', { planet: "bitrex" });
-      infoStore.setInfo(response.data[0]);
-      setShowModal(false);
-      document.location.href = '/';
-  }
-
-  handleClick()
+  const register = async () => {
+    try {
+       const response = await axios.post(`${config.url}/api/reg`, { planet: "bitrex", initData });
+       console.log('Registration response:', response.data);
+    } catch (error) {
+       console.error('Error during registration:', error);
+    }
+ };
+ 
+ register(); 
 
   const auth = async () => {
     try {
