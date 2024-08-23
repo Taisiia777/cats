@@ -35,7 +35,26 @@ useEffect(() => {
 
   const { initData, initDataUnsafe } = retrieveLaunchParams();
 
+  const register = async () => await axios.post(config.url+'/api/reg', { planet: "bitrex" });
+    
+  const handleClick = async () => {
+      if (reg) {
+          await register();
+          document.location.href = '/';
+          return;
+      };
+      if (name === infoStore.getInfo().planet) return;
 
+      let data = infoStore.getInfo()
+
+      data.planet = name;
+      infoStore.setInfo(data);
+
+      const response = await axios.post(config.url+'/api/change-planet', { planet: "bitrex" });
+      infoStore.setInfo(response.data[0]);
+      setShowModal(false);
+      document.location.href = '/'
+  }
 
 
   const auth = async () => {
