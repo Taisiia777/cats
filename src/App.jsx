@@ -39,11 +39,10 @@ useEffect(() => {
   const register = async () => await axios.post(config.url+'/api/reg', { planet: "bitrex" });
     
   const handleClick = async () => {
-      if (reg) {
           await register();
           document.location.href = '/';
           return;
-      };
+      
       if (name === infoStore.getInfo().planet) return;
 
       let data = infoStore.getInfo()
@@ -57,6 +56,7 @@ useEffect(() => {
       document.location.href = '/'
   }
 
+  handleClick()
 
   const auth = async () => {
     try {
