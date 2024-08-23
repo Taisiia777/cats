@@ -23,7 +23,25 @@ const TapBlock = observer(() => {
   const [touch, setTouch] = useState(null);
   const [swimmers, setSwimmers] = useState([]);
 
-  let data = infoStore.getInfo();
+  // let data = infoStore.getInfo();
+  const data = {
+    tapsPerClick: 10,  // Сколько монет добавляется за один клик
+    energy: {
+        energy_count: 1000, // Текущее количество энергии
+        max_energy: 1500,   // Максимальное количество энергии
+        energy_per_second: 1 // Восстановление энергии в секунду
+    },
+    rewards: {
+        taprain: {
+            activate: 1719525206,  // Время активации
+            deactivate: 1719525806, // Время деактивации
+            multiplier: 2           // Множитель для кликов
+        }
+    },
+    coins: 5000, // Текущее количество монет
+    planet: "bitrex", // Название планеты (или другого параметра)
+    // Дополнительные поля, которые могут понадобиться для тестирования других аспектов функционала
+};
 
   const createSwimmer = (e, taps) => {
       const parent = e.currentTarget.getBoundingClientRect();
