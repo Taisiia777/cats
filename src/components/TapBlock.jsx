@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch} from "react-redux";
 import { setUser } from "../store/reducers/userSlice";
 import { useAppSelector } from "../store";
-
+import axios from "axios";
 
 export default function TapBlock () {
   const navigate = useNavigate();
