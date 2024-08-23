@@ -59,8 +59,7 @@ const taps = async (e, taps) => {
 
     if (taps !== 0) {
         const unix = Math.floor(Date.now() / 1000)
-        const tg = window.Telegram.WebApp;
-        tg.HapticFeedback.impactOccurred('medium');
+        window.Telegram.WebApp.HapticFeedback.impactOccurred('medium');
 
         setTapsCount(tapsCount => tapsCount + taps);
         let coins = 0;
