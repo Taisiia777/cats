@@ -30,10 +30,6 @@ function App() {
   }, [appState]);
 const [loading,setLoading] = useState(true);
 useEffect(()=>{
-setTimeout(()=>{setLoading(false)},1500);
-
-},[]);
-useEffect(() => {
   let hasFetchedReferralCode = false;
   let hasSavedUserId = false;
 
@@ -72,35 +68,24 @@ useEffect(() => {
           });
         }
           try {
-            const response = await axios.post(
-              "https://coinfarm.club/api/user",
-              {
-                username: username,
-                coins: 0,
-                totalEarnings: 0,
-                incomeMultiplier: 1,
-                coinsPerHour: 1000,
-                xp: 1000,
-                level: 0,
-                referralCode: referralCode,
-              }
-            );
-
-
-            if (response.status === 409) {
-              const userData =  response.data;
-              alert(`User already exists: ${JSON.stringify(userData)}`);
-              const userLeagueIndex = userData ? userData.level : 0;
-              const userHarvestMultiplier = leagues[userLeagueIndex]?.harvest || 1;
-              const calculatedInHour = userData?.coinsPerHour * userHarvestMultiplier;
+            const response = await axios.post("https://coinfarm.club/api/user", {
+              username: username,
+              coins: 0,
+              totalEarnings: 0,
+              incomeMultiplier: 1,
+              coinsPerHour: 1000,
+              xp: 1000,
+              level: 0,
+              referralCode: referralCode,
+          });
+          
+          if (response.status === 409) {
+              const userData = response.data;
               dispatch(setUser(userData));
-            }else {
-              const newUser =  response.data;
-              const userLeagueIndex = newUser ? newUser.level : 0;
-              const userHarvestMultiplier = leagues[userLeagueIndex]?.harvest || 1;
-              const calculatedInHour = newUser?.coinsPerHour * userHarvestMultiplier;
+          } else {
+              const newUser = response.data;
               dispatch(setUser(newUser));
-            }
+          }
           } catch (error) {
             console.error("Error:", error);
           }
@@ -114,12 +99,9 @@ useEffect(() => {
     };
 
     fetchData(); // Initial fetch on component mount
+setTimeout(()=>{setLoading(false)},1500);
 
-    const interval = setInterval(fetchData, 2000); // Fetch every 2 seconds
-    
-    return () => clearInterval(interval); // Clean up interval on component unmount
-
-  }, []); // Add other dependencies if needed
+},[]);
 
 return (
     <>
