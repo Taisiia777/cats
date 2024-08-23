@@ -157,13 +157,13 @@ export default function TapBlock () {
 </div>
 <div style={{marginBottom: 20}} className="bal">
     <Coin width={38} />
-    <h4>{user.coins}</h4>
+    <h4>000</h4>
 </div>
 <div className="daily_code">
     <input placeholder="Ежедневный шифр" type="text" />
     <button>
         <Coin width={18} />
-    +{user.coinsPerHour}
+    + 000
     </button>
 </div>
 <div className="circle">
