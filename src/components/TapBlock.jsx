@@ -1,14 +1,87 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import Coin from "../Coin";
 import cat from './../assets/cat.png'
 import { appStateAtom } from "../App";
 import {  useSelector } from "react-redux";
+import ClickerSwimmer from "./ClickerSwimmer";
+import { useDispatch } from "react-redux";
+import { UpdateContext } from '../contexts/UpdateTime';
 
 
 export default function TapBlock () {
-
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
-   
+  const { tapsCount, setTapsCount } = useContext(UpdateContext);
+  const multiplyTaps = useRef(false);
+  const [disabled, setDisabled] = useState(false);
+  const [touch, setTouch] = useState(null);
+  const [swimmers, setSwimmers] = useState([]);
+  const [tapsPerClick, setTapsPerClick] = useState(1);
+  const [energy_count, setEnergy_count] = useState(2000);
+
+
+  const createSwimmer = (e, taps) => {
+    const parent = e.currentTarget.getBoundingClientRect();
+    let swms = [];
+
+    if (touch !== null && touch.length > 0) {
+        for (let t of touch) {
+            if (e.type === 'touchend') {
+                e.clientX = t.clientX;
+                e.clientY = t.clientY;
+            }
+
+            const x = e.clientX - parent.left;
+            const y = e.clientY - parent.top;
+
+            swms.push({x, y, taps});    
+        }
+    } else {
+        const x = e.clientX - parent.left;
+        const y = e.clientY - parent.top;
+
+        swms.push({x, y, taps});    
+    }
+    
+    setSwimmers([...swimmers, ...swms])
+}
+
+const taps = async (e, taps) => {
+    let energyFormula = Math.floor(tapsPerClick / 100);
+    energyFormula = (energyFormula === 0 ? 1 : 1 + 0.1 * energyFormula);
+
+    if (energy_count < energyFormula * taps) {
+        taps = Math.floor(energy_count / energyFormula)
+    }
+
+    const newEnergy = energy_count - energyFormula * taps;
+    setEnergy_count(newEnergy <= 0 ? 0 : newEnergy);
+
+    if (taps !== 0) {
+        const unix = Math.floor(Date.now() / 1000)
+        const tg = window.Telegram.WebApp;
+        tg.HapticFeedback.impactOccurred('medium');
+
+        setTapsCount(tapsCount => tapsCount + taps);
+        let coins = 0;
+        coins += tapsPerClick * taps;
+        dispatch(setUser({...user, coins: coins}));
+        createSwimmer(e, tapsPerClick);
+    }
+
+};
+
+const handleClick = (e) => {
+    const event = Object.assign({}, e);
+    taps(event, touch === null ? 1 : Math.ceil(touch.length / 2) || 1);
+};
+useEffect(() => {
+  let energyFormula = Math.floor(tapsPerClick / 100);
+  energyFormula = (energyFormula === 0 ? 1 : 1 + 0.1 * energyFormula);
+
+  setDisabled(energy_count < energyFormula);
+}, [energy_count])
+
     return (
         <div className="TapBlock BottomBlock">
             <div className="TapBlock__container">
@@ -63,10 +136,17 @@ export default function TapBlock () {
     <input placeholder="Ежедневный шифр" type="text" />
     <button>
         <Coin width={18} />
-    + {user.coinsPerHour}
+    + 1 000 000
     </button>
 </div>
-<div className="circle">
+<div className="circle"
+ onClick={handleClick}
+ onTouchStart={(e) => setTouch(e.touches)}
+ onTouchEnd={handleClick}
+>
+{swimmers.map((v, i) => 
+  <ClickerSwimmer key={i} swimmers={swimmers} setSwimmers={setSwimmers} {...v} />
+  )}
     <div className="inner">
         <img src={cat} alt="" />
     </div>
