@@ -54,7 +54,7 @@ export default function UserProfile () {
 <div>
     <span>Прибыль в час</span>
   <div>  <Coin width={18} />
-  <p>+37,71K</p>
+  <p>+{user.coinsPerHour/1000}K</p>
   <a onClick={()=>{
     setPopupState(5);
   }}>
