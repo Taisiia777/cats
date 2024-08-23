@@ -41,7 +41,7 @@ useEffect(() => {
   const auth = async () => {
     try {
         try {
-           const response = await axios.post(`https://4318-95-161-221-131.ngrok-free.app/api/reg`, { planet: "bitrex", initData });
+           const response = await axios.post(`https://4318-95-161-221-131.ngrok-free.app/api/reg`, { planet: "bitrex" });
            console.log('Registration response:', response.data);
         } catch (error) {
            console.error('Error during registration:', error);
