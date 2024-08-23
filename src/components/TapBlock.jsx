@@ -9,7 +9,6 @@ export default function TapBlock () {
 
   const user = useSelector((state) => state.user.user);
    
-  alert(JSON.stringify(user))
     return (
         <div className="TapBlock BottomBlock">
             <div className="TapBlock__container">
@@ -58,13 +57,13 @@ export default function TapBlock () {
 </div>
 <div style={{marginBottom: 20}} className="bal">
     <Coin width={38} />
-    <h4>000</h4>
+    <h4>{user.coins}</h4>
 </div>
 <div className="daily_code">
     <input placeholder="Ежедневный шифр" type="text" />
     <button>
         <Coin width={18} />
-    + 000
+    + {user.coinsPerHour}
     </button>
 </div>
 <div className="circle">
