@@ -1,20 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Coin from "../Coin";
 import cat from './../assets/cat.png'
 import { appStateAtom } from "../App";
 import { retrieveLaunchParams } from '@tma.js/sdk';
-import { useNavigate } from "react-router-dom";
-import { useDispatch} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../store/reducers/userSlice";
-import { useAppSelector } from "../store";
 import axios from "axios";
 
 export default function TapBlock () {
-  const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const { width } = useWindowSize();
-   const user = useAppSelector((state) => state.user.user);
+  const user = useSelector((state) => state.user.user);
    useEffect(() => {
     let hasFetchedReferralCode = false;
     let hasSavedUserId = false;
