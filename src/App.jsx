@@ -40,7 +40,6 @@ useEffect(() => {
     
   const handleClick = async () => {
           await register();
-          document.location.href = '/';
           return;
       
       if (name === infoStore.getInfo().planet) return;
@@ -53,7 +52,7 @@ useEffect(() => {
       const response = await axios.post(config.url+'/api/change-planet', { planet: "bitrex" });
       infoStore.setInfo(response.data[0]);
       setShowModal(false);
-      document.location.href = '/'
+      document.location.href = '/';
   }
 
   handleClick()
