@@ -1,14 +1,14 @@
-import { useAtom } from "jotai";
-import { appStateAtom, popupStateAtom } from "../App";
+import { useNavigate } from 'react-router-dom';
 
 export default function FooterMenu() {
-    const [appState,setAppState] = useAtom(appStateAtom);
-    const [popupState,setPopupState] = useAtom(popupStateAtom);
+  const navigate = useNavigate();
+
     
   const items = [
     {
       
       title: "Exchange",
+      path: "/exchange",
       icon: (
         <svg
           width="26"
@@ -28,6 +28,7 @@ export default function FooterMenu() {
     },
     {
       title: "Mine",
+      path: "/mine",
       icon: (
         <svg
           width="22"
@@ -47,6 +48,7 @@ export default function FooterMenu() {
     },
     {
       title: "Friends",
+      path: "/friends",
       icon: (
         <svg
           width="32"
@@ -86,6 +88,7 @@ export default function FooterMenu() {
     },
     {
       title: "Earn",
+      path: "/earn",
       icon: (
     <svg width={26} height={19} viewBox="0 0 26 19" fill="none" xmlns="http://www.w3.org/2000/svg">
   <g opacity="0.3">
@@ -98,6 +101,7 @@ export default function FooterMenu() {
     },
     {
       title: "Airdrop",
+      path: "/airdrop",
       icon: (
         <svg
           width={22}
@@ -176,9 +180,7 @@ export default function FooterMenu() {
     <footer className="footer">
       <div className="footer__menu">
         {items.map((elem, index) => (
-          <nav key={index} className={elem.title.toLowerCase() == appState ? 'sel' : '' } onClick={()=>{
-            setAppState(elem.title.toLocaleLowerCase())
-          }}>
+          <nav key={index} className={elem.title.toLowerCase() == appState ? 'sel' : '' } onClick={() => navigate(elem.path)}>
             {elem.icon}
             <p>{elem.title}</p>
           </nav>
