@@ -5,8 +5,8 @@ import { appStateAtom } from "../App";
 import { retrieveLaunchParams } from '@tma.js/sdk';
 import { useNavigate } from "react-router-dom";
 import { useDispatch} from "react-redux";
-import { setUser } from "../../store/reducers/userSlice";
-import { useAppSelector } from "../../store";
+import { setUser } from "../store/reducers/userSlice";
+import { useAppSelector } from "../store";
 
 
 export default function TapBlock () {
