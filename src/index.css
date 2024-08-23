@@ -28,6 +28,20 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  overflow: hidden; /* Дополнительное свойство, чтобы убедиться, что скроллы не появляются */
+
+}
+html, body {
+  overflow: hidden; /* Отключение скроллов */
+  height: 100%; /* Убедитесь, что высота страницы занимает всю высоту окна */
+}
+* {
+  scrollbar-width: none; /* Отключение скроллов в Firefox */
+  -ms-overflow-style: none;  /* Отключение скроллов в IE и Edge */
+}
+
+*::-webkit-scrollbar {
+  display: none; /* Отключение скроллов в Chrome, Safari и Opera */
 }
 
 h1 {
