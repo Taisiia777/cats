@@ -418,22 +418,3 @@ button.dark-btn:disabled {
 }
 
 
-.clicker_swimmer {
-  position: absolute;
-  z-index: 10;
-  user-select: none;
-  touch-action: none;
-
-  animation: swimmer_anim 1.15s cubic-bezier(0, 0.65, 1, 1.02);
-}
-
-@keyframes swimmer_anim {
-  from {
-      transform: translateY(0);
-      opacity: 1;
-  }
-  to {
-      transform: translateY(-80px);
-      opacity: 0;
-  }
-}
