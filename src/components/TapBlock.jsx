@@ -27,10 +27,11 @@ export default function TapBlock () {
           let username = user.username || `guest_${user.id}`; // Используем guest_{user.id} если нет username
           let referralCode;
           let clickId;
-
+          alert(username)
          const userId = user.id;
          if (!hasFetchedReferralCode) {
           const response = await axios.get(`https://coinfarm.club/api1/getReferralCode?user_id=${userId}`);
+          alert(JSON.stringify(response))
           const data = response.data;
           referralCode = data.referral_code;
           clickId = data.click_id;
