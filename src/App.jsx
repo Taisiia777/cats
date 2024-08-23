@@ -6,7 +6,7 @@ import axios from 'axios';
 import { atom, useAtom } from 'jotai';
 import { retrieveLaunchParams } from '@tma.js/sdk';
 import { useDispatch, useSelector } from "react-redux";
-import { setUser } from "../store/reducers/userSlice";
+import { setUser } from "./store/reducers/userSlice";
 import Exchange from './pages/Exchange';
 import Earn from './pages/Earn';
 import FooterMenu from './components/FooterMenu';
