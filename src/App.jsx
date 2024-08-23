@@ -16,7 +16,6 @@ import AirDrop from './pages/Airdrop';
 import Friends from './pages/Friends';
 import Mine from './pages/Mine';
 import Level from './pages/Level';
-import infoStore from './stores/infoStore';
 export const appStateAtom = atom('exchange');
 export const popupStateAtom = atom(1);
 function App() {
@@ -24,7 +23,7 @@ function App() {
 
   const [appState,setAppState] = useAtom(appStateAtom);
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo(0, 0)
   }, [appState]);
 const [loading,setLoading] = useState(true);
 useEffect(()=>{
