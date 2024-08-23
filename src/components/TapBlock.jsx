@@ -84,9 +84,8 @@ const TapBlock = observer(() => {
 
       if (taps !== 0) {
           const unix = Math.floor(Date.now() / 1000);
-          const tg = window.Telegram.WebApp;
           let tapsPerClick;
-          tg.HapticFeedback.impactOccurred('medium');
+          window.Telegram.WebApp.HapticFeedback.impactOccurred('medium');
 
           if (data.rewards.taprain !== undefined && unix < data.rewards.taprain.deactivate) {
               multiplyTaps.current = true; 
