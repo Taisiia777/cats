@@ -11,6 +11,7 @@ export default function TapBlock () {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
   const [tapsCount, setTapsCount] = useState(2000);
+  const [coins, setCoins] = useState(user.coins);
 
   const multiplyTaps = useRef(false);
   const [disabled, setDisabled] = useState(false);
@@ -62,9 +63,7 @@ const taps = async (e, taps) => {
         window.Telegram.WebApp.HapticFeedback.impactOccurred('medium');
 
         setTapsCount(tapsCount => tapsCount + taps);
-        let coins = 0;
-        coins += tapsPerClick * taps;
-        dispatch(setUser({...user, coins: coins}));
+        setCoins(coins => coins + (tapsPerClick * taps))
         createSwimmer(e, tapsPerClick);
     }
 
@@ -129,7 +128,7 @@ useEffect(() => {
 </div>
 <div style={{marginBottom: 20}} className="bal">
     <Coin width={38} />
-    <h4>{user.coins}</h4>
+    <h4>{coins}</h4>
 </div>
 <div className="daily_code">
     <input placeholder="Ежедневный шифр" type="text" />
