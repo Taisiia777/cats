@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Roboto:wght@400;500;700&display=swap");
+
 * {
   padding: 0;
   margin: 0;
@@ -19,7 +20,7 @@ h6,
 span,
 nav {
   color: white;
-  font-family: "Roboto";
+  font-family: "Roboto", sans-serif;
 }
 
 button, a {
@@ -30,11 +31,13 @@ html {
   --primary: #12b0b0;
 }
 
-.container- {
-  max-width: 100vw;
-  width: 100vw;
+body {
   overflow-x: hidden;
-  max-height: 100vh;
+  background-color: #0d0d0d;
+}
+
+.container- {
+  width: 100vw;
   height: 100vh;
   overflow-y: auto;
   position: relative;
@@ -73,41 +76,49 @@ p {
 .loading-block {
   width: 100%;
   min-height: 100vh;
-  background: url("./assets/loading_background.png");
+  background: url("./assets/loading_background.png") no-repeat center center;
   background-size: cover;
   padding-bottom: 60px;
 }
+
 .loading-block .loading-block__content {
-  position: relative;
   position: absolute;
-  height: 100vh;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 39.54%, #000000 85.43%);
-  padding-bottom: 57px;
+  height: 100%;
   width: 100%;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 40%, #000000 85%);
+  padding-bottom: 57px;
   align-items: center;
   text-align: center;
-  min-height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
 }
+
 .loading-block .loading-block__content::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
   height: 100%;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 39.54%, #000000 85.43%);
   width: 100%;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 40%, #000000 85%);
 }
+
 .loading-block .loading-block__content *:not(img) {
   z-index: 5;
 }
+
 .loading-block .loading-block__content p {
   margin-bottom: 10px;
   color: white;
   max-width: 213px;
 }
+
 .loading-block .loading-block__content > div {
   display: flex;
   gap: 20px;
 }
+
 .loading-block .loading-block__content > div > nav {
   width: 60px;
   height: 60px;
@@ -118,20 +129,24 @@ p {
   border: 1px solid #717274;
   border-radius: 50%;
 }
+
 .loading-block .loading-block__content .spinner {
   margin-bottom: 15px;
   animation: rotation 1s linear infinite;
 }
+
 .loading-block .loading-block__content > h1 {
   font-size: 96px;
   line-height: 112px;
   color: var(--primary);
   margin-bottom: 14px;
 }
+
 .loading-block .loading-block__content > img:first-child {
-  width: 430px;
+  width: 100%;
+  max-width: 430px;
+  height: auto;
   bottom: 192px;
-  height: 501px;
 }
 
 @keyframes rotation {
@@ -142,17 +157,18 @@ p {
     transform: rotate(360deg);
   }
 }
+
 .footer {
   position: absolute;
   bottom: 24px;
-  width: 100vw;
+  width: calc(100% - 30px);
   height: 64px;
   margin-inline: 15px;
-  max-width: calc(100% - 30px);
   background: rgba(12, 43, 43, 0.8);
   border-radius: 12px;
   z-index: 19;
 }
+
 .footer__menu {
   display: flex;
   width: 100%;
@@ -160,6 +176,7 @@ p {
   align-items: center;
   justify-content: space-between;
 }
+
 .footer__menu > nav {
   width: 78px;
   display: flex;
@@ -170,12 +187,11 @@ p {
   justify-content: space-between;
   padding: 8px;
 }
-.footer__menu > nav.sel:nth-child(2) > svg > g, .footer__menu > nav.sel:nth-child(3) > svg > g, .footer__menu > nav.sel:nth-child(4) > svg > g {
-  opacity: 1;
-}
+
 .footer__menu > nav.sel p {
   opacity: 1;
 }
+
 .footer__menu > nav > p {
   font-size: 10px;
   line-height: 10px;
@@ -195,15 +211,16 @@ p {
   overflow: hidden;
   border-top: 3px solid #15cfcf;
 }
+
 .BottomBlock.BottomBlock::after,
 .PopupBlock.BottomBlock::after {
+  content: "";
   background: #15cfcf;
   border-radius: 50%;
   top: 122px;
   height: 982px;
   width: 331px;
   opacity: 0.3;
-  content: "";
   position: absolute;
   filter: blur(70px);
 }
@@ -215,40 +232,47 @@ p {
   width: 100%;
   flex-direction: column;
 }
+
 .earn-block__body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
+
 .earn-block__body > p {
   font-size: 18px;
   font-weight: 500;
   margin: 20px 0;
   line-height: 22px;
 }
+
 .earn-block__top {
   padding-bottom: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 .earn-block__top > a {
   color: #12B0B0;
   font-size: 16px;
   margin-top: 20px;
   line-height: 20px;
 }
+
 .earn-block__top > span {
   color: #6A6A6A;
   font-size: 16px;
   margin-bottom: 20px;
   line-height: 20px;
 }
+
 .earn-block__top > div {
   display: flex;
   gap: 12px;
   align-items: center;
 }
+
 .earn-block__top > div > p {
   font-size: 28px;
   line-height: 32px;
@@ -257,8 +281,8 @@ p {
 }
 
 button.dark-btn {
-  background: rgba(12, 43, 43, 0.3019607843);
-  border: 1px solid rgba(255, 255, 255, 0.3019607843);
+  background: rgba(12, 43, 43, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   display: flex;
   padding: 12px;
   width: 100%;
@@ -269,24 +293,29 @@ button.dark-btn {
   position: relative;
   padding-right: 32px;
 }
+
 button.dark-btn > a {
   position: absolute;
   right: 16px;
   align-self: center;
 }
+
 button.dark-btn > a > svg {
   display: block;
 }
+
 button.dark-btn > div {
   display: flex;
   flex-direction: column;
   gap: 4px;
   align-items: flex-start;
 }
+
 button.dark-btn > div > p {
   font-size: 16px;
   line-height: 20px;
 }
+
 button.dark-btn > div > span {
   display: flex;
   align-items: center;
@@ -295,11 +324,13 @@ button.dark-btn > div > span {
   font-size: 16px;
   line-height: 20px;
 }
+
 button.dark-btn > div > span > p {
   font-size: 16px;
   line-height: 20px;
   font-weight: 500;
 }
+
 button.dark-btn:disabled {
   opacity: 0.4;
 }
@@ -322,6 +353,7 @@ button.dark-btn:disabled {
   padding-top: 40px;
   z-index: 20;
 }
+
 .PopupBlock .balance-display {
   display: flex;
   flex-direction: column;
@@ -333,6 +365,7 @@ button.dark-btn:disabled {
   background: #2A313C;
   border-radius: 12px;
 }
+
 .PopupBlock .balance-display > h5 {
   font-size: 18px;
   line-height: 20px;
@@ -340,17 +373,20 @@ button.dark-btn:disabled {
   color: white;
   text-align: center;
 }
+
 .PopupBlock .balance-display > span {
   display: flex;
   margin-bottom: 22px;
   gap: 12px;
 }
+
 .PopupBlock .balance-display > span > p {
   font-size: 40px;
   color: white;
   line-height: 48px;
   font-weight: 700;
 }
+
 .PopupBlock .balance-display > section {
   width: 80px;
   position: relative;
@@ -364,9 +400,11 @@ button.dark-btn:disabled {
   justify-content: center;
   background: #2A313C;
 }
+
 .PopupBlock .btn {
   margin-top: 16px;
 }
+
 .PopupBlock .close-btn {
   position: absolute;
   top: 24px;
@@ -374,6 +412,7 @@ button.dark-btn:disabled {
   width: 24px;
   height: 24px;
 }
+
 .PopupBlock > * {
   z-index: 400;
-}/*# sourceMappingURL=App.css.map */
+}
