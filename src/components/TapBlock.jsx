@@ -5,13 +5,13 @@ import { appStateAtom } from "../App";
 import {  useSelector } from "react-redux";
 import ClickerSwimmer from "./ClickerSwimmer";
 import { useDispatch } from "react-redux";
-import { UpdateContext } from '../contexts/UpdateTime';
 
 
 export default function TapBlock () {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
-  const { tapsCount, setTapsCount } = useContext(UpdateContext);
+  const [tapsCount, setTapsCount] = useState(2000);
+
   const multiplyTaps = useRef(false);
   const [disabled, setDisabled] = useState(false);
   const [touch, setTouch] = useState(null);
