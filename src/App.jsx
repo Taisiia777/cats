@@ -16,6 +16,7 @@ import AirDrop from './pages/Airdrop';
 import Friends from './pages/Friends';
 import Mine from './pages/Mine';
 import Level from './pages/Level';
+import infoStore from './stores/infoStore';
 export const appStateAtom = atom('exchange');
 export const popupStateAtom = atom(1);
 function App() {
