@@ -35,7 +35,7 @@ useEffect(() => {
 
 
   const { initData, initDataUnsafe } = retrieveLaunchParams();
-
+  console.log(JSON.stringify(initData))
   const register = async () => await axios.post(config.url+'/api/reg', { planet: "bitrex" });
     
   const handleClick = async () => {
