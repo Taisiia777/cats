@@ -1,125 +1,8 @@
+import { useState } from "react";
 import Coin from "../Coin";
-import cat from './../assets/cat.png';
+import cat from './../assets/cat.png'
 import { appStateAtom } from "../App";
-import { observer } from "mobx-react-lite";
-import infoStore from '../stores/infoStore';
-
-import { UpdateContext } from '../contexts/UpdateTime';
-
-import { useState, useEffect, useRef, useContext } from "react";
-// import { ReactComponent as Energy } from '../assets/svg/energy.svg';
-
-import CutNumber from '../CutNumber';
-import ClickerAction from './ClickerAction';
-import ClickerSwimmer from "./ClickerSwimmer";
-
-// export default function TapBlock () {
-const TapBlock = observer(() => {
-
-  const { tapsCount, setTapsCount } = useContext(UpdateContext);
-  const multiplyTaps = useRef(false);
-  
-  const [disabled, setDisabled] = useState(false);
-  const [touch, setTouch] = useState(null);
-  const [swimmers, setSwimmers] = useState([]);
-
-  // let data = infoStore.getInfo();
-  const data = {
-    tapsPerClick: 10,  // Сколько монет добавляется за один клик
-    energy: {
-        energy_count: 1000, // Текущее количество энергии
-        max_energy: 1500,   // Максимальное количество энергии
-        energy_per_second: 1 // Восстановление энергии в секунду
-    },
-    rewards: {
-        taprain: {
-            activate: 1719525206,  // Время активации
-            deactivate: 1719525806, // Время деактивации
-            multiplier: 2           // Множитель для кликов
-        }
-    },
-    coins: 5000, // Текущее количество монет
-    planet: "bitrex", // Название планеты (или другого параметра)
-    // Дополнительные поля, которые могут понадобиться для тестирования других аспектов функционала
-};
-
-  const createSwimmer = (e, taps) => {
-      const parent = e.currentTarget.getBoundingClientRect();
-      let swms = [];
-
-      if (touch !== null && touch.length > 0) {
-          for (let t of touch) {
-              if (e.type === 'touchend') {
-                  e.clientX = t.clientX;
-                  e.clientY = t.clientY;
-              }
-  
-              const x = e.clientX - parent.left;
-              const y = e.clientY - parent.top;
-  
-              swms.push({x, y, taps});    
-          }
-      } else {
-          const x = e.clientX - parent.left;
-          const y = e.clientY - parent.top;
-
-          swms.push({x, y, taps});    
-      }
-      
-      setSwimmers([...swimmers, ...swms])
-  }
-
-  const taps = (e, taps) => {
-      let energyFormula = Math.floor(data.tapsPerClick / 100);
-      energyFormula = (energyFormula === 0 ? 1 : 1 + 0.1 * energyFormula);
-
-      if (data.energy.energy_count < energyFormula * taps) {
-          taps = Math.floor(data.energy.energy_count / energyFormula)
-      }
-
-      const newEnergy = data.energy.energy_count - energyFormula * taps;
-      const energy_count = newEnergy <= 0 ? 0 : newEnergy;
-
-      data.energy = {...data.energy, energy_count};
-
-      if (taps !== 0) {
-          const unix = Math.floor(Date.now() / 1000);
-          let tapsPerClick;
-          window.Telegram.WebApp.HapticFeedback.impactOccurred('medium');
-
-          if (data.rewards.taprain !== undefined && unix < data.rewards.taprain.deactivate) {
-              multiplyTaps.current = true; 
-              tapsPerClick = data.tapsPerClick * data.rewards.taprain.multiplier;
-          } else {
-              if (multiplyTaps.current) {
-                  setTapsCount(0);
-                  multiplyTaps.current = false;
-              }
-
-              tapsPerClick = data.tapsPerClick;
-          }
-
-          setTapsCount(tapsCount => tapsCount + taps)
-          data.coins += tapsPerClick * taps;
-          createSwimmer(e, tapsPerClick);
-      }
-
-      infoStore.setInfo(data);
-  };
-
-  const handleClick = (e) => {
-      const event = Object.assign({}, e);
-      taps(event, touch === null ? 1 : Math.ceil(touch.length / 2) || 1);
-  };
-
-
-
-  useEffect(() => {
-      let energyFormula = Math.floor(data.tapsPerClick / 100);
-      energyFormula = (energyFormula === 0 ? 1 : 1 + 0.1 * energyFormula);
-
-      setDisabled(data.energy.energy_count < energyFormula);
-  }, [data.energy.energy_count])
+export default function TapBlock () {
     return (
         <div className="TapBlock BottomBlock">
             <div className="TapBlock__container">
@@ -168,7 +51,7 @@ const TapBlock = observer(() => {
 </div>
 <div style={{marginBottom: 20}} className="bal">
     <Coin width={38} />
-    <h4>{CutNumber(data.coins, ' ').toString().toUpperCase()}</h4>
+    <h4>507,981</h4>
 </div>
 <div className="daily_code">
     <input placeholder="Ежедневный шифр" type="text" />
@@ -177,14 +60,7 @@ const TapBlock = observer(() => {
     +5 000 000
     </button>
 </div>
-<div className="circle"
-                onClick={window.screen.width > 768 ? handleClick : null}
-                onTouchStart={(e) => setTouch(e.touches)}
-                onTouchEnd={handleClick}
->
-{swimmers.map((v, i) => 
-                    <ClickerSwimmer key={i} swimmers={swimmers} setSwimmers={setSwimmers} {...v} />
-                )}
+<div className="circle">
     <div className="inner">
         <img src={cat} alt="" />
     </div>
@@ -201,8 +77,7 @@ const TapBlock = observer(() => {
   </defs>
 </svg>
 
-{/* <p>4471 / 5000</p> */}
-{data.energy.energy_count.toFixed(1)}<span>/{data.energy.max_energy}</span>
+<p>4471 / 5000</p>
     </div>
     <div onClick={()=>{
       
@@ -224,6 +99,4 @@ const TapBlock = observer(() => {
 </div>
         </div>
     )
-  });
-
-export default TapBlock;
+}

@@ -31,53 +31,7 @@ useEffect(()=>{
 setTimeout(()=>{setLoading(false)},1500);
 
 },[]);
-useEffect(() => {
 
-
-  const { initData, initDataUnsafe } = retrieveLaunchParams();
-  console.log(JSON.stringify(initData))
-
-
-  const auth = async () => {
-    try {
-        try {
-           const response = await axios.post(`https://4318-95-161-221-131.ngrok-free.app/api/reg`, { planet: "bitrex" });
-           console.log('Registration response:', response.data);
-        } catch (error) {
-           console.error('Error during registration:', error);
-        }
-  
-     
-      let response;
-      await axios.post('https://4318-95-161-221-131.ngrok-free.app/api/init', { initData });
-
-      if (document.location.href === 'https://4318-95-161-221-131.ngrok-free.app/welcome') return setShow(true);
-
-      response = await axios.post('https://4318-95-161-221-131.ngrok-free.app/api/info');
-      if (response.data.length === 0 && !document.location.href.includes('/api')) {
-        return document.location.href = '/welcome';
-      }
-
-      infoStore.setInfo(response.data[0]);
-
-      if (!document.location.href.includes('/clan/my')) {
-        response = await axios.post('https://4318-95-161-221-131.ngrok-free.app/api/clan');
-        setClan(response.data);
-      }
-
-      if (initDataUnsafe?.start_param && !infoStore.getInfo().clan) {
-        initDataUnsafe.start_param = initDataUnsafe.start_param.toString();
-
-      }
-
-      setShow(true);
-    } catch (error) {
-      console.error('Error during auth:', error);
-    }
-  };
-
-  auth();
-}, []);
 
 return (
     <>
